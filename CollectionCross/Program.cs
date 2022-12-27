@@ -11,11 +11,11 @@
 			collectionOne.AddRange(arrayOne);
 			collectionTwo.AddRange(arrayTwo);
 
-			collectionOne = duplicatedElementsRemove(collectionOne);
-			collectionTwo = duplicatedElementsRemove(collectionTwo);
+			collectionOne = removeDuplicatedElements(collectionOne);
+			collectionTwo = removeDuplicatedElements(collectionTwo);
 
-			collectionOne = crossElementsRemove(collectionTwo, collectionOne);
-			collectionTwo = crossElementsRemove(collectionOne, collectionTwo);
+			collectionOne = removeCrossElements(collectionTwo, collectionOne);
+			collectionTwo = removeCrossElements(collectionOne, collectionTwo);
 
 			collectionOne.AddRange(collectionTwo);
 
@@ -25,7 +25,7 @@
 				Console.Write(" ");
 			}
 
-			static List<string> duplicatedElementsRemove(List<string> collection)
+			static List<string> removeDuplicatedElements(List<string> collection)
 			{
 				for (int i = 0; i < collection.Count; i++)            
 					for (int j = i + 1; j < collection.Count; j++)
@@ -40,7 +40,7 @@
 				return collection;
 			}
 
-			static List<string> crossElementsRemove(List<string> collectionOne, List<string>  collectionTwo)
+			static List<string> removeCrossElements(List<string> collectionOne, List<string>  collectionTwo)
 			{
 				foreach (var item in collectionOne)
 				{
