@@ -6,66 +6,48 @@
 		{
 			string[] arrayOne = new string[] { "1", "84", "2", "1", "1", "5" };
 			string[] arrayTwo = new string[] { "3", "2", "2", "5", "82" };  
-			List<string> collectionSumaryOne = new List<string>();
-			List<string> collectionSumaryTwo = new List<string>();
-			collectionSumaryOne.AddRange(arrayOne);
-			collectionSumaryTwo.AddRange(arrayTwo);
+			List<string> collectionOne= new List<string>();
+			List<string> collectionTwo = new List<string>();
+			collectionOne.AddRange(arrayOne);
+			collectionTwo.AddRange(arrayTwo);
 
-			for (int i = 0; i < collectionSumaryOne.Count; i++)            //Циклы удаления лишних элементов
-				for (int j = i + 1; j < collectionSumaryOne.Count; j++)
-				{
-					if (collectionSumaryOne[i] == collectionSumaryOne[j])
+			collectionOne = duplicatedElementsRemove(collectionOne);
+			collectionTwo = duplicatedElementsRemove(collectionTwo);
+
+			collectionOne = crossElementsRemove(collectionTwo, collectionOne);
+			collectionTwo = crossElementsRemove(collectionOne, collectionTwo);
+
+			collectionOne.AddRange(collectionTwo);
+
+			foreach (var item in collectionOne)
+			{
+				Console.Write(item);
+				Console.Write(" ");
+			}
+
+			static List<string> duplicatedElementsRemove(List<string> collection)
+			{
+				for (int i = 0; i < collection.Count; i++)            
+					for (int j = i + 1; j < collection.Count; j++)
 					{
-						collectionSumaryOne.RemoveAt(j);
-						--j;
+						if (collection[i] == collection[j])
+						{
+							collection.RemoveAt(j);
+							--j;
+						}
 					}
-				}
-					
-						
-						
 
-			for (int i = 0; i < collectionSumaryTwo.Count; i++)            //Циклы удаления лишних элементов
-				for (int j = i + 1; j < collectionSumaryTwo.Count; j++)
+				return collection;
+			}
+
+			static List<string> crossElementsRemove(List<string> collectionOne, List<string>  collectionTwo)
+			{
+				foreach (var item in collectionOne)
 				{
-					if (collectionSumaryTwo[i] == collectionSumaryTwo[j])
-					{
-						collectionSumaryTwo.RemoveAt(j);
-						--j;
-					}		
+					collectionTwo.Contains(item);
+					collectionTwo.Remove(item);
 				}
-					
-
-			foreach (var item in collectionSumaryOne)
-			{
-				collectionSumaryTwo.Contains(item);
-				collectionSumaryTwo.Remove(item);
-			}
-
-			foreach (var item in collectionSumaryTwo)
-			{
-				collectionSumaryOne.Contains(item);
-				collectionSumaryOne.Remove(item);
-			}
-
-			foreach (var item in collectionSumaryOne)
-			{
-				Console.Write(item);
-			}
-
-			Console.WriteLine();
-
-			foreach (var item in collectionSumaryTwo)
-			{
-				Console.Write(item);
-			}
-
-			Console.WriteLine();
-
-			collectionSumaryOne.AddRange(collectionSumaryTwo);
-
-			foreach (var item in collectionSumaryOne)
-			{
-				Console.WriteLine(item);
+				return collectionTwo;
 			}
 
 
