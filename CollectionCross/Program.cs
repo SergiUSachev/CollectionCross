@@ -5,19 +5,21 @@
 		static void Main(string[] args)
 		{
 			string[] arrayOne = new string[] { "1", "84", "2", "1", "1", "5" };
-			string[] arrayTwo = new string[] { "3", "2", "2", "5", "82" };  
+			string[] arrayTwo = new string[] { "3", "2", "2", "5", "82" };
+			
 			List<string> collectionOne= new List<string>();
 			List<string> collectionTwo = new List<string>();
-			collectionOne.AddRange(arrayOne);
-			collectionTwo.AddRange(arrayTwo);
 
-			collectionOne = removeDuplicatedElements(collectionOne);
-			collectionTwo = removeDuplicatedElements(collectionTwo);
+			collectionOne = MakingFilteredCollection(arrayOne);
+			collectionTwo = MakingFilteredCollection(arrayTwo);
 
-			collectionOne = removeCrossElements(collectionTwo, collectionOne);
-			collectionTwo = removeCrossElements(collectionOne, collectionTwo);
-
-			collectionOne.AddRange(collectionTwo);
+			foreach (var item in collectionTwo)
+			{
+				if (!collectionOne.Contains(item))
+				{
+					collectionOne.Add(item);
+				}
+			}
 
 			foreach (var item in collectionOne)
 			{
@@ -25,32 +27,18 @@
 				Console.Write(" ");
 			}
 
-			static List<string> removeDuplicatedElements(List<string> collection)
+			static List<string> MakingFilteredCollection(string[] array)
 			{
-				for (int i = 0; i < collection.Count; i++)            
-					for (int j = i + 1; j < collection.Count; j++)
+				List<string> collection = new List<string>();
+				foreach (var item in array)
+				{
+					if (!collection.Contains(item))
 					{
-						if (collection[i] == collection[j])
-						{
-							collection.RemoveAt(j);
-							--j;
-						}
+						collection.Add(item);
 					}
-
+				}           
 				return collection;
 			}
-
-			static List<string> removeCrossElements(List<string> collectionOne, List<string>  collectionTwo)
-			{
-				foreach (var item in collectionOne)
-				{
-					collectionTwo.Contains(item);
-					collectionTwo.Remove(item);
-				}
-				return collectionTwo;
-			}
-
-
 		}
 	}
 }
