@@ -6,37 +6,33 @@
 		{
 			string[] arrayOne = new string[] { "1", "84", "2", "1", "1", "5" };
 			string[] arrayTwo = new string[] { "3", "2", "2", "5", "82" };
-			
-			List<string> collectionOne= new List<string>();
-			List<string> collectionTwo = new List<string>();
 
-			collectionOne = MakingFilteredCollection(arrayOne);
-			collectionTwo = MakingFilteredCollection(arrayTwo);
+			List<string> collection = new List<string>();
 
-			foreach (var item in collectionTwo)
-			{
-				if (!collectionOne.Contains(item))
-				{
-					collectionOne.Add(item);
-				}
-			}
+			collection = MakingFilteredCollection(collection, arrayOne);
+			collection = MakingFilteredCollection(collection, arrayTwo);
 
-			foreach (var item in collectionOne)
+			foreach (var item in collection)
 			{
 				Console.Write(item);
 				Console.Write(" ");
 			}
 
-			static List<string> MakingFilteredCollection(string[] array)
+			static List<string> MakingFilteredCollection(List<string> collection, string[] array)
 			{
-				List<string> collection = new List<string>();
+
 				foreach (var item in array)
 				{
-					if (!collection.Contains(item))
+					if (collection.Contains(item))
+					{
+
+					}
+					else
 					{
 						collection.Add(item);
 					}
-				}           
+				}
+
 				return collection;
 			}
 		}
