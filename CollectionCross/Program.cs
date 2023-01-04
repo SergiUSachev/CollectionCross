@@ -9,31 +9,29 @@
 
 			List<string> collection = new List<string>();
 
-			collection = MakingFilteredCollection(collection, arrayOne);
-			collection = MakingFilteredCollection(collection, arrayTwo);
+			MakeFilteredCollection(collection, arrayOne);
+			MakeFilteredCollection(collection, arrayTwo);
 
-			foreach (var item in collection)
+			ShowFilteredCollection(collection);
+
+			static void MakeFilteredCollection(List<string> collection, string[] array)
 			{
-				Console.Write(item);
-				Console.Write(" ");
-			}
-
-			static List<string> MakingFilteredCollection(List<string> collection, string[] array)
-			{
-
 				foreach (var item in array)
 				{
-					if (collection.Contains(item))
-					{
-
-					}
-					else
+					if (!collection.Contains(item))
 					{
 						collection.Add(item);
 					}
 				}
+			}
 
-				return collection;
+			static void ShowFilteredCollection(List<string> collection)
+			{
+				foreach (var item in collection)
+				{
+					Console.Write(item);
+					Console.Write(" ");
+				}
 			}
 		}
 	}
